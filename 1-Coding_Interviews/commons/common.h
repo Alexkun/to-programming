@@ -25,5 +25,9 @@
 #define STACK_ERROR_NUM -9999 // 栈内部的无效值
 #define StackElementType int // 栈元素值
 
+// 树
+#define TreeElementType int // 树元素值
+
+
 
 

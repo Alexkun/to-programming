@@ -19,7 +19,9 @@ LinkStack* InitLinkStack() {
     s = (LinkStack*)malloc(sizeof(LinkStack));  
     if (!s) {  
         printf("空间不足\n");  
+        return NULL;
     }  
+    s->data = -1;
     s->next = NULL;  
     return s;  
 }  
@@ -56,7 +58,7 @@ StackElementType Pop(LinkStack* s) {
     return topData;  
 }  
   
-// 打印链栈
+// 打印链栈;不打印头结点
 void PrintLinkStack(LinkStack* s) {  
     printf("当前栈中的元素:\n");  
     LinkStack* p;  

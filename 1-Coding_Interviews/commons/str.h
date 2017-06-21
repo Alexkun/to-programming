@@ -14,4 +14,14 @@
 int getstrlen (char str[]);
 
 
+/*
+ * 判断int型数组是否含有某元素，并返回第一个下标
+ */
+int ArrContainInt(int arr[], int length, int value);
+
+
+/*
+ * 判断char型数组是否含有某元素，并返回第一个下标
+ */
+int ArrContainChar(char arr[], int length, char value);
 

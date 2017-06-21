@@ -18,7 +18,7 @@
   
 //堆栈的顺序存储结构通常由一个一维数组和一个记录栈顶元素位置的变量组成  
 typedef struct {  
-    StackElementType data[ARRAY_SIZE_MEDIUM];  
+    StackElementType data[MAX_STACK_SIZE];  
     int top;  
 } Stack;  
   

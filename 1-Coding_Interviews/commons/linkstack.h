@@ -7,10 +7,10 @@
 #include <stdbool.h>
 #include "common.h"
 
-typedef struct Node {  
+typedef struct LinkStackNode {  
     StackElementType data;  
-    struct Node* next;  
-}LinkStack;  
+    struct LinkStackNode* next;  
+} LinkStack;  
 
 
 //初始化堆栈  

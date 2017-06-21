@@ -9,6 +9,22 @@
 #include "list.h"
 #include <stdlib.h>
 
+
+
+
+/*
+ * 初始化链表，生成头结点
+ *
+ */
+ListNode* InitLinkList()
+{
+	ListNode* pHead = (ListNode*)malloc(sizeof(ListNode));
+	pHead->value = -1;
+	pHead->next = NULL;
+	return pHead;
+}
+
+
 /*
  * 尾部添加节点
  *
@@ -97,6 +113,30 @@ void PrintList(ListNode* pHead, const char* msg)
 	}
 	printf("%d \n", pNode->value);
 
+}
+
+
+/*
+ * 销毁一个链表
+ */
+void DestroyLinkList(ListNode *pHead)
+{
+	if(NULL == pHead)
+		return;
+	else
+	{
+		ListNode* pToDel;
+		while(pHead->next)
+		{
+			pToDel = pHead;
+			pHead = pHead->next;
+			free(pToDel);
+		}
+		free(pHead);
+		pHead = NULL;
+		pToDel = NULL;
+		
+	}
 }
 
 

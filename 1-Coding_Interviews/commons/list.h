@@ -17,6 +17,13 @@ typedef struct ListNode
 
 } ListNode;
 
+
+/*
+ * 初始化链表，生成头结点
+ *
+ */
+ListNode* InitLinkList();
+
 /*
  * 尾部添加节点
  *
@@ -36,5 +43,13 @@ void RemoveNode(ListNode** pHead, int value);
  *
  */
 void PrintList(ListNode *pHead, const char* msg);
+
+/*
+ * 销毁一个链表
+ */
+void DestroyLinkList(ListNode *pHead);
+
+
+
 
 

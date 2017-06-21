@@ -24,3 +24,38 @@ int getstrlen (char str[])
 
 
 
+/*
+ * 判断int型数组是否含有某元素，并返回第一个下标
+ * 返回-1表示不含有该元素
+ */
+int ArrContainInt(int arr[], int length, int value)
+{
+	if(NULL == arr || length <= 0)
+		return -1;
+
+	for(int i = 0; i < length; i++)
+	{
+		if(arr[i] == value)
+			return i;
+	}
+	return -1;
+}
+
+
+/*
+ * 判断char型数组是否含有某元素，并返回第一个下标
+ */
+int ArrContainChar(char arr[], int length, char value)
+{
+	if(NULL == arr || length <= 0)
+		return -1;
+
+	for(int i = 0; i < length; i++)
+	{
+		if(arr[i] == value)
+			return i;
+	}
+	return -1;
+}
+
+
