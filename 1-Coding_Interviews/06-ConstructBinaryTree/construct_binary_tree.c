@@ -3,12 +3,13 @@
 	> Author: Y.K.Young
 	> Mail: winkunkun@gmail.com
 	> Created Time: 二  6/20 16:39:57 2017
+	> 
  ************************************************************************/
 
 #include <stdio.h>
 #include "../commons/bintree.h"
 #include <stdlib.h>
-#include "../commons/stack.h"
+#include "../commons/linkstack.h"
 
 // 要先申明
 BinaryTreeNode* ConstructCore(int* startPreorder, int* endPreorder, 
@@ -93,11 +94,15 @@ BinaryTreeNode* ConstructCore(int* startPreorder, int* endPreorder,
 	}
 }
 
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//>>>>>>>>>>>>>遍历二叉树
+//参考博客园另外解法：
+//	http://www.cnblogs.com/dolphin0520/archive/2011/08/25/2153720.html#!comments
 
 /*
  * 递归打印二叉树(先序遍历)
  */
-void PrePrintBinaryTree(BinaryTreeNode* root)
+void PrePrintBinaryTreeRecursive(BinaryTreeNode* root)
 {
 	if(NULL == root)
 	{
@@ -109,13 +114,13 @@ void PrePrintBinaryTree(BinaryTreeNode* root)
 	{
 		printf("\nroot: %d ", root->value);
 		printf(", left: %d ", root->pLeft->value);
-		PrintBinaryTree(root->pLeft);
+		PrePrintBinaryTreeRecursive(root->pLeft);
 	}
 	if(NULL != root->pRight)
 	{
 		printf("\nroot: %d ", root->value);
 		printf(", right: %d ", root->pRight->value);
-		PrintBinaryTree(root->pRight);
+		PrePrintBinaryTreeRecursive(root->pRight);
 	}
 
 }
@@ -123,26 +128,213 @@ void PrePrintBinaryTree(BinaryTreeNode* root)
 /*
  * 迭代打印二叉树（先序遍历）
  */
+bool isContain(int arr[], int length, int element)
+{
+	if(NULL == arr || length <= 0)
+	{
+		return false;
+	}
+
+	int i = 0;
+	for(; i < length; i++)
+	{
+		if(arr[i] == element)
+			return true;
+	}
+	return false;
+}
 
 void PrePrintBinaryTreeIteration(BinaryTreeNode* root)
 {
 	if(NULL == root)
 		return;
 
-	Stack* stack = InitStack();
+	VoidLinkStack stack = InitVLS();
 	if(!stack)
 		fprintf(stderr, "%s\n", "Stack init err.");
-	int arr[ARRAY_SIZE_MEDIUM] = {0};
+	int visit[ARRAY_SIZE_MEDIUM] = {0};
+	int length = 0;
+	int i;
+	bool visited = false;
 
-	Push(stack, root->value);
-	while(!IsEmpty)
+	visit[length++] = root->value;
+	VLSPush(stack, root);
+	while(!VLSIsEmpty(stack))
 	{
-		int value = Pop(stack);
+		BinaryTreeNode* node = VLSPeek(stack);
+		if(node->pLeft)  // 含有左孩子
+		{
+			if(!isContain(visit, length, node->pLeft->value)) 
+			{ // 左孩子未访问
+				visit[length++] = node->pLeft->value;
+				VLSPush(stack, node->pLeft);
+				continue;
+			}
+			
+		}
+
+		if(node->pRight) // 含有右孩子
+		{ 
+			if(!isContain(visit, length, node->pRight->value))
+			{ // 右孩子未访问
+				visit[length++] = node->pRight->value;
+				VLSPush(stack, node->pRight);
+				continue;
+			}
+			else
+			{
+				VLSPop(stack);
+				continue;
+			}
+		}
+		VLSPop(stack);
 
 	}
+	printf("%s\n", "Pre visit nums: ");
+	for(i = 0; i < length; i++)
+	{
+		printf("%d ", visit[i]);
+	}
+	printf("\n");
 
 }
 
+/*
+ * 迭代打印二叉树（中序遍历）
+ */
+void MidPrintBinaryTreeIteration(BinaryTree root)
+{
+	if(NULL == root) return;
+
+	VoidLinkStack stack = InitVLS();
+	if(!stack)
+	{
+		fprintf(stderr, "%s\n", "Stack init err.");
+		return;
+	}	
+
+	int visit[ARRAY_SIZE_MEDIUM] = {0};
+	int length = 0;
+	int i;
+	bool visited = false;
+
+	VLSPush(stack, root);
+	while(!VLSIsEmpty(stack))
+	{
+		BinaryTreeNode* node = VLSPeek(stack);
+		if(node->pLeft)  // 含有左孩子
+		{
+			if(!isContain(visit, length, node->pLeft->value)) 
+			{ // 左孩子未访问
+				VLSPush(stack, node->pLeft);
+				continue;
+			}
+			
+		}
+
+		visit[length++] = node->value; // 访问当前节点
+		node = VLSPop(stack);
+
+		if(node->pRight) // 含有右孩子
+		{ 
+			if(!isContain(visit, length, node->pRight->value))
+			{ // 右孩子未访问
+				VLSPush(stack, node->pRight);
+				continue;
+			}
+			
+		}
+
+	}
+	printf("%s\n", "Mid visit nums: ");
+	for(i = 0; i < length; i++)
+	{
+		printf("%d ", visit[i]);
+	}
+	printf("\n");
+}
+
+
+/*
+ * 迭代打印二叉树（后序遍历）
+ */
+void AftPrintBinaryTreeIteration(BinaryTree root)
+{
+	if(NULL == root) return;
+
+	VoidLinkStack stack = InitVLS();
+	if(!stack)
+	{
+		fprintf(stderr, "%s\n", "Stack init err.");
+		return;
+	}	
+
+	int visit[ARRAY_SIZE_MEDIUM] = {0};
+	int length = 0;
+	int i;
+	bool visited = false;
+
+	VLSPush(stack, root);
+	while(!VLSIsEmpty(stack))
+	{
+		BinaryTreeNode* node = VLSPeek(stack);
+		if(node->pLeft)  // 含有左孩子
+		{
+			if(!isContain(visit, length, node->pLeft->value)) 
+			{ // 左孩子未访问
+				VLSPush(stack, node->pLeft);
+				continue;
+			}
+			
+		}
+
+		if(node->pRight) // 含有右孩子
+		{ 
+			if(!isContain(visit, length, node->pRight->value))
+			{ // 右孩子未访问
+				VLSPush(stack, node->pRight);
+				continue;
+			}
+			
+		}
+
+		visit[length++] = node->value; // 访问当前节点
+		VLSPop(stack);
+
+	}
+	printf("%s\n", "Aft visit nums: ");
+	for(i = 0; i < length; i++)
+	{
+		printf("%d ", visit[i]);
+	}
+	printf("\n");
+}
+
+
+/*
+ * 销毁一颗树
+ * 方法：递归遍历并删除节点
+ */
+void DestroyBinaryTree(BinaryTree root)
+{
+	if(NULL == root)
+	{
+		return;
+	}
+
+	if(NULL != root->pLeft)
+	{
+		DestroyBinaryTree(root->pLeft);
+	}
+	if(NULL != root->pRight)
+	{
+		DestroyBinaryTree(root->pRight);
+	}
+	printf("del value: %d \n", root->value);
+	free(root);
+	root = NULL;
+	return;
+}
 
 
 int main()
@@ -151,7 +343,23 @@ int main()
 	int inOrder[] = {4, 7, 2, 1, 5, 3, 8, 6};
 	BinaryTreeNode* root = ConstructPreAndIn(preOrder, inOrder, 8);
 
-	PrePrintBinaryTree(root);
+	printf("Pre print tree recursive.\n");
+	PrePrintBinaryTreeRecursive(root);
+	printf("\n");
+
+	printf("\nPre print tree iteration.\n");
+	PrePrintBinaryTreeIteration(root);
+
+	printf("\nMid print tree iteration.\n");
+	MidPrintBinaryTreeIteration(root);
+
+	printf("\nAft print tree iteration.\n");
+	AftPrintBinaryTreeIteration(root);
+
+	DestroyBinaryTree(root);
 	return 0;
 }
+
+
+
 

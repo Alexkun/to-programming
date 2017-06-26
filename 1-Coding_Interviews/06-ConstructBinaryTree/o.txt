@@ -1,0 +1,9 @@
+construct_binary_tree.c:112:3: warning: implicit declaration of function 'PrintBinaryTree' is invalid in C99 [-Wimplicit-function-declaration]
+                PrintBinaryTree(root->pLeft);
+                ^
+1 warning generated.
+Undefined symbols for architecture x86_64:
+  "_PrintBinaryTree", referenced from:
+      _PrePrintBinaryTreeRecursive in construct_binary_tree-e03519.o
+ld: symbol(s) not found for architecture x86_64
+clang: error: linker command failed with exit code 1 (use -v to see invocation)

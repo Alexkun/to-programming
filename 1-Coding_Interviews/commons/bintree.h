@@ -12,7 +12,7 @@ typedef struct BinaryTreeNode
 	TreeElementType value;
 	struct BinaryTreeNode* pLeft;
 	struct BinaryTreeNode* pRight;
-}BinaryTreeNode;
+}BinaryTreeNode, *BinaryTree;
 
 
 /*
