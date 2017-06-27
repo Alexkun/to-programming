@@ -27,7 +27,7 @@ Stack* InitStack() {
 // 判断是否已满
 bool IsFull(Stack* stack) {  
     if (stack->top == MAX_STACK_SIZE - 1) {  
-        printf("堆栈已满\n");  
+        //printf("堆栈已满\n");  
         return true;  
     }  
     return false;  
@@ -36,7 +36,7 @@ bool IsFull(Stack* stack) {
 // 判断是否为空 
 bool IsEmpty(Stack* stack) {  
     if (stack->top == -1) {  
-        printf("堆栈空\n");  
+        //printf("堆栈空\n");  
         return true;  
     }  
     return false;  
