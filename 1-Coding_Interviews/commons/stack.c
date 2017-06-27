@@ -34,7 +34,7 @@ bool IsFull(Stack* stack) {
 }  
  
 // 判断是否为空 
-int IsEmpty(Stack* stack) {  
+bool IsEmpty(Stack* stack) {  
     if (stack->top == -1) {  
         printf("堆栈空\n");  
         return true;  

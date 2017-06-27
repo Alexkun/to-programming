@@ -31,7 +31,7 @@ Stack* InitStack();
 bool IsFull(Stack* stack);
 
 // 判断是否为空 
-int IsEmpty(Stack* stack);
+bool IsEmpty(Stack* stack);
 
 //入栈  
 bool Push(Stack* stack, StackElementType item);
