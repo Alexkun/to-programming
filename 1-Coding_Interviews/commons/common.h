@@ -7,6 +7,9 @@
  ************************************************************************/
 #pragma once
 
+// 数学
+#define DOUBLE_PRECISE 0.000001
+
 // 矩阵
 #define MAX_ROW 101
 #define MAX_COL 101
