@@ -4,7 +4,7 @@
 	> Mail: winkunkun@gmail.com
 	> Created Time: 二  6/20 16:55:47 2017
  ************************************************************************/
-
+#pragma once
 #include "common.h"
 
 typedef struct BinaryTreeNode

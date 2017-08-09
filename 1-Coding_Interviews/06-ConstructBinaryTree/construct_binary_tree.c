@@ -336,7 +336,7 @@ void DestroyBinaryTree(BinaryTree root)
 	return;
 }
 
-
+/*
 int main()
 {
 	int preOrder[] = {1, 2, 4, 7, 3, 5, 6,8};
@@ -357,9 +357,10 @@ int main()
 	AftPrintBinaryTreeIteration(root);
 
 	DestroyBinaryTree(root);
+	root = NULL;
 	return 0;
 }
 
-
+*/
 
 

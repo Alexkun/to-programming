@@ -105,7 +105,7 @@ void PrintList(ListNode* pHead, const char* msg)
 	}
 
 	ListNode* pNode = pHead;
-	printf("%s With headnode: ", msg);
+	printf("%s : ", msg);
 	while(pNode->next != NULL)
 	{
 		printf("%d ", pNode->value);

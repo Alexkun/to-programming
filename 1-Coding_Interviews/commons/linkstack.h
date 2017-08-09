@@ -4,6 +4,7 @@
 	> Mail: winkunkun@gmail.com
 	> Created Time: 一  6/19 17:59:24 2017
  ************************************************************************/
+#pragma once
 #include <stdbool.h>
 #include "common.h"
 
